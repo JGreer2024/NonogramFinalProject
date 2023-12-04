@@ -5,52 +5,141 @@ public class Board {
 
     private String[][] numBoard; // first index = rows / second = col
 
-    public Board(int difficulty, boolean random){
+    private int[][] guessBoard;
+
+    private int length;
+
+    public Board(int difficulty, boolean random) {
         this.difficulty = difficulty;
         this.random = random;
-        if (!random){
+        if (!random) {
             board = alreadyMadeBoards(difficulty);
-        //} else if (random == true){
+            //} else if (random == true){
         }
         numBoard = hintGetter();
-
+        if (difficulty == 1) {
+            guessBoard = new int[5][5];
+        } else if (difficulty == 2) {
+            guessBoard = new int[10][10];
+        } else {
+            guessBoard = new int[15][15];
+        }
     }
 
-    public int[][] alreadyMadeBoards(int difficulty){
-        if (difficulty == 1){
-            int[][] easyBoard = {{0,0,0,1,1},{1,1,1,0,0},{0,0,1,1,1},{1,0,1,0,1},{1,0,0,0,1}};
+    public void updateGraph(int row, int col) {
+        if (board[row-1][col-1] == 1) {
+            guessBoard[row-1][col-1] = 1;
+        } else {
+            board[row-1][col-1] = 2;
+            guessBoard[row-1][col-1] = 2;
+        }
+        if (isEndBoard()) {
+            endGame();
+        }
+    }
+
+    public void endGame() {
+        System.out.println("You completed the game! Congratulations!");
+        System.exit(0);
+    }
+
+    public boolean isEndBoard() {
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board.length; j++) {
+                if (board[i][j] != guessBoard[i][j]) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public int[][] alreadyMadeBoards(int difficulty) {
+        if (difficulty == 1) {
+            int[][] easyBoard = {{0, 0, 0, 1, 1}, {1, 1, 1, 0, 0}, {0, 0, 1, 1, 1}, {1, 0, 1, 0, 1}, {1, 0, 0, 0, 1}};
+            length = 5;
             return easyBoard;
         } else if (difficulty == 2) {
             int[][] mediumBoard = {{0, 0, 0, 0, 0, 0, 0, 0, 1, 1}, {0, 0, 0, 0, 0, 0, 0, 1, 1, 1}, {0, 0, 0, 0, 1, 0, 1, 1, 1, 0}, {0, 0, 0, 1, 1, 1, 1, 1, 0, 0}, {0, 1, 1, 1, 1, 1, 1, 0, 0, 0}, {1, 1, 0, 0, 1, 1, 0, 0, 0, 0}, {1, 1, 0, 0, 1, 1, 0, 0, 0, 0}, {1, 1, 1, 0, 0, 1, 1, 0, 0, 0}, {1, 1, 1, 1, 0, 1, 0, 0, 0, 0}, {0, 1, 1, 0, 0, 1, 0, 0, 0, 0}, {1, 1, 1, 1, 1, 1, 1, 1, 1, 1}};
+            length = 10;
             return mediumBoard;
         } else {
-            int[][] hardBoard = {{1,1,0,0,0,0,1,1,1,0,0,0,0,1,1},{1,1,1,0,0,1,1,1,1,1,0,0,1,1,1},{1,1,1,1,1,1,1,1,1,1,1,1,0,0,1},{1,0,0,1,1,1,1,1,1,1,1,1,0,1,1},{1,1,1,0,0,0,1,1,0,0,0,1,1,1,1},{1,1,1,0,0,0,1,1,0,0,0,1,1,1,1},{0,0,1,1,1,1,1,1,1,1,1,1,0,0,0},{0,0,1,0,0,0,0,0,0,0,0,1,0,0,0},{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},{0,0,0,1,1,1,1,1,1,1,1,1,0,0,0},{0,0,0,1,1,1,1,1,1,1,1,1,0,0,0},{0,0,0,1,1,1,1,1,1,1,1,1,0,0,0},{0,0,0,1,1,1,1,1,1,1,1,1,0,0,0},{0,0,0,1,1,1,1,1,1,1,1,1,0,0,0},{0,0,0,1,1,0,0,0,0,0,1,1,0,0,0}};
+            int[][] hardBoard = {{1, 1, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, 0, 1, 1}, {1, 1, 1, 0, 0, 1, 1, 1, 1, 1, 0, 0, 1, 1, 1}, {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1}, {1, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1}, {1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1}, {1, 1, 1, 0, 0, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1}, {0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0}, {0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0}, {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}, {0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0}, {0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0}, {0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0}, {0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0}, {0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0}, {0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0}};
+            length = 15;
             return hardBoard;
         }
     }
 
-    public String[][] hintGetter(){
-        String[][] numberBoard = new String[board.length-1][board.length-1];
+    public String[][] hintGetter() {
+        String[][] numberBoard = new String[2][board.length + 1];
         String colHelper = "";
         String rowHelper = "";
         int rowNumbers = 0;
         int colNumbers = 0;
-        for(int i = 0; i < board.length; i++){ // row getter
-            for(int j = 0; j < board.length; j++){
-                if (board[i][j] == 1){
-                    rowNumbers ++;
-                } else if (board[j][i] == 0 || j == board.length-1){
-                    rowHelper = rowHelper + " " + rowNumbers;
-                    rowNumbers = 0;
-                } if (board[j][i] == 1){
-                    colNumbers ++;
-                } else if (board[j][i] == 0 || j == board.length-1) {
-                    colHelper = colHelper + " " + colNumbers;
-                    colNumbers = 0;
-                } if (j == board.length -1){
-                    numberBoard[i][]
+        for (int i = 0; i < board.length; i++) { // row getter
+            for (int j = 0; j < board.length; j++) {
+                if (board[i][j] == 1) {
+                    rowNumbers++;
+                } if (board[i][j] == 0 || j == board.length - 1) {
+                    if (rowNumbers != 0) {
+                        rowHelper = rowHelper + "  " + rowNumbers;
+                        rowNumbers = 0;
+                    }
+                }
+                if (board[j][i] == 1) {
+                    colNumbers++;
+                } if (board[j][i] == 0 || j == board.length - 1) {
+                    if (colNumbers != 0) {
+                        colHelper = colHelper + "  " + colNumbers;
+                        colNumbers = 0;
+                    }
+                }
+                if (j == board.length - 1) {
+                    numberBoard[1][i] = rowHelper;
+                    numberBoard[0][i] = colHelper; // puts finished hint lines in corresponding spots in the array
+                    rowHelper = "";
+                    colHelper = "";
                 }
             }
         }
+        return numberBoard;
+    }
+
+    private String[] nextNumDelete(String[] numberString){
+        String[] returner;
+        String helpful = "";
+        for(int i = 0; i < numberString.length; i++) {
+            for (int j = 0; j < numberString[i].length(); j++) {
+                String numbers = numberString[i];
+                if (numbers.charAt(j) != ' ') {
+                    helpful+= numbers.charAt(j) + "\n";
+                }
+            }
+        }
+        }
+    }
+
+    @Override
+    public String toString() {
+        String boardPrint = "";
+        String colString = "";
+        String bottomBar = "\n ";
+        for (int i = 0; i < board.length; i++) {
+            colString += numBoard[0][i] + " ";
+            bottomBar += "_ ";
+        }
+        colString += bottomBar;
+        boardPrint+= colString + "\n";
+        // make col string
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board.length; j++) {
+                if (j == board.length - 1) {
+                    boardPrint += " " + board[i][j] + "  |" + numBoard[1][i] + "\n";
+                } else {
+                    boardPrint += " " + board[i][j];
+                }
+            }
+        }
+        return boardPrint;
     }
 }

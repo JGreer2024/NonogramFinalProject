@@ -1,5 +1,8 @@
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+        Board testCase = new Board(1, false);
+        System.out.println(testCase);
+        testCase.updateGraph(1,4);
+        System.out.println(testCase);
     }
 }
