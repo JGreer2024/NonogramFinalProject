@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ae809255-4794-43e5-bdb1-1ff09890aa16" name="Changes" comment="I started creating the board class with pre-made already working boards as well as starting a hint getter which will give the user the clues needed to solve the puzzle.">
+    <list default="true" id="ae809255-4794-43e5-bdb1-1ff09890aa16" name="Changes" comment="I fixed the printing of the game board and started working on the orientation of its hints.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Board.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
@@ -41,6 +41,20 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;
   }
 }</component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="Nonogram Final Project" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -57,7 +71,14 @@
       <option name="project" value="LOCAL" />
       <updated>1701369805471</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="I fixed the printing of the game board and started working on the orientation of its hints.">
+      <created>1701722208450</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1701722208450</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -73,6 +94,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="I started creating the board class with pre-made already working boards as well as starting a hint getter which will give the user the clues needed to solve the puzzle." />
-    <option name="LAST_COMMIT_MESSAGE" value="I started creating the board class with pre-made already working boards as well as starting a hint getter which will give the user the clues needed to solve the puzzle." />
+    <MESSAGE value="I fixed the printing of the game board and started working on the orientation of its hints." />
+    <option name="LAST_COMMIT_MESSAGE" value="I fixed the printing of the game board and started working on the orientation of its hints." />
   </component>
 </project>

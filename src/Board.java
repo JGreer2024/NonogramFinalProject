@@ -71,7 +71,7 @@ public class Board {
     }
 
     public String[][] hintGetter() {
-        String[][] numberBoard = new String[2][board.length + 1];
+        String[][] numberBoard = new String[2][board.length];
         String colHelper = "";
         String rowHelper = "";
         int rowNumbers = 0;
@@ -105,27 +105,44 @@ public class Board {
         return numberBoard;
     }
 
-    private String[] nextNumDelete(String[] numberString){
-        String[] returner;
-        String helpful = "";
+    private String nextNumDelete(String[] numberString){
+        String helpful = " ";
+        int longestValues = 0;
         for(int i = 0; i < numberString.length; i++) {
-            for (int j = 0; j < numberString[i].length(); j++) {
-                String numbers = numberString[i];
-                if (numbers.charAt(j) != ' ') {
-                    helpful+= numbers.charAt(j) + "\n";
-                }
+            numberString[i] = numberString[i].replaceAll(" ", "");
+            int longestLength = numberString[i].length();
+            if (longestLength >= longestValues) {
+                longestValues = longestLength;
+            }
+        } for(int i = 0; i < numberString.length; i++){
+            int longestLength = numberString[i].length();
+            while(longestLength < longestValues){
+                numberString[i] = "0" + numberString[i];
+                longestLength ++;
             }
         }
-        }
+        for(int i = 0; i < longestValues; i++) {
+            for (int j = 0; j < numberString.length; j++) {
+                if (numberString[j].charAt(i) != '0'){
+                    helpful += numberString[j].charAt(i) + " ";
+                } else if (numberString[j].charAt(i) == '0') {
+                    helpful += "  ";
+                }
+                    if (j == numberString.length-1){
+                        helpful += "\n ";
+                    }
+                }
+            }
+        return helpful;
     }
 
     @Override
     public String toString() {
         String boardPrint = "";
-        String colString = "";
-        String bottomBar = "\n ";
+        String[] colHints = numBoard[0];
+        String colString = nextNumDelete(colHints);
+        String bottomBar = "";
         for (int i = 0; i < board.length; i++) {
-            colString += numBoard[0][i] + " ";
             bottomBar += "_ ";
         }
         colString += bottomBar;
