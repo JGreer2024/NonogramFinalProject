@@ -9,7 +9,7 @@ public class Board {
 
     private int length;
 
-    public Board(int difficulty, boolean random) {
+    public Board(int difficulty, boolean random, boolean isSolver) {
         this.difficulty = difficulty;
         this.random = random;
         if (!random) {
@@ -24,6 +24,9 @@ public class Board {
         } else {
             guessBoard = new int[15][15];
         }
+        if (isSolver){
+            boardSolver();
+        }
     }
 
     public void updateGraph(int row, int col, boolean guessBlank) {
@@ -36,15 +39,71 @@ public class Board {
             endGame();
         }
     }
+    public int getLengthOfClue(String unstringIt){
+        int finalAmount = 0;
+        for(int i = 0; i < unstringIt.length(); i++){
+            if (unstringIt.charAt(i) == ' '){
+                finalAmount++;
+            } else {
+                int adder = Character.getNumericValue(unstringIt.charAt(i));
+                finalAmount += adder;
+            }
+        }
+        return finalAmount;
+    }
+    public void fillAreaGivenCode(String fillThis, int whichRowOrCol, boolean isRow){
+        String fillsAlong = "";
+        String lengthHelp = "";
+        while (fillsAlong.length()!=board.length){
+            lengthHelp = getFirstNum(fillThis);
+            fillThis = fillThis.substring(lengthHelp.length()+1);
+            for (int i = 0; i < Integer.parseInt(lengthHelp); i++){
+                if (i == Integer.parseInt(lengthHelp)-1){
+                    fillsAlong+= "fe";
+                } else {
+                    fillsAlong+= "f";
+                }
+            }
+        }
+        if (isRow) {
+            for (int i = 0; i < board.length; i++) {
+                if (fillsAlong.charAt(i) == 'f') {
+                    updateGraph(whichRowOrCol, i, false);
+                } else {
+                    updateGraph(whichRowOrCol, i, true);
+                }
+            }
+        } else {
+            for (int i = 0; i < board.length; i++) {
+                if (fillsAlong.charAt(i) == 'f') {
+                    updateGraph(i, whichRowOrCol, false);
+                } else {
+                    updateGraph(i, whichRowOrCol, true);
+                }
+            }
+        }
+    }
 
+    public String getFirstNum(String string){
+        String nextNum = "";
+
+        for(int i = 0; i < string.length();i++){
+            if (string.charAt(i) == ' '){
+                return nextNum;
+            } else {
+                nextNum += string.charAt(i);
+            }
+        }
+        return nextNum;
+    }
     public void boardSolver(){
         while(isEndBoard() == false){
             for(int i = 0; i < board.length; i++){
                 for (int j = 0; j < board.length; j++){
-                    if (guessBoard[1][j] == board.length){
-                        for (int k = 0; k < board.length; k++){
-                            updateGraph(j, i, false);
-                        }
+                    if (getLengthOfClue(numBoard[1][j]) == board.length){
+                        fillAreaGivenCode(numBoard[1][j], j, true);
+                    } else if (getLengthOfClue(numBoard[0][j]) == board.length){
+                        fillAreaGivenCode(numBoard[0][j],j,false);
                     }
                 }
             }

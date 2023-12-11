@@ -26,11 +26,12 @@ public class Main {
             difficulty = 3;
         }
 
-        Board testCase = new Board(difficulty, isRandom);
+        Board testCase = new Board(difficulty, isRandom, isAI);
         System.out.println(testCase);
         testCase.updateGraph(1,4, false);
         System.out.println(testCase);
 
+        testCase.getLengthOfClue("1 1 2 3");
 
     }
 }
