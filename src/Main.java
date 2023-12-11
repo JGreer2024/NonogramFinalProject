@@ -28,7 +28,7 @@ public class Main {
 
         Board testCase = new Board(difficulty, isRandom);
         System.out.println(testCase);
-        testCase.updateGraph(1,4);
+        testCase.updateGraph(1,4, false);
         System.out.println(testCase);
 
 

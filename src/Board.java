@@ -26,15 +26,28 @@ public class Board {
         }
     }
 
-    public void updateGraph(int row, int col) {
-        if (board[row-1][col-1] == 1) {
-            guessBoard[row-1][col-1] = 1;
-        } else {
-            board[row-1][col-1] = 2;
+    public void updateGraph(int row, int col, boolean guessBlank) {
+        if (guessBlank == true && board[row-1][col-1] == 0) {
             guessBoard[row-1][col-1] = 2;
+        } else if (guessBlank == false && board[row-1][col-1] == 1){
+            guessBoard[row-1][col-1] = 1;
         }
         if (isEndBoard()) {
             endGame();
+        }
+    }
+
+    public void boardSolver(){
+        while(isEndBoard() == false){
+            for(int i = 0; i < board.length; i++){
+                for (int j = 0; j < board.length; j++){
+                    if (guessBoard[1][j] == board.length){
+                        for (int k = 0; k < board.length; k++){
+                            updateGraph(j, i, false);
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -151,9 +164,9 @@ public class Board {
         for (int i = 0; i < board.length; i++) {
             for (int j = 0; j < board.length; j++) {
                 if (j == board.length - 1) {
-                    boardPrint += " " + board[i][j] + "  |" + numBoard[1][i] + "\n";
+                    boardPrint += " " + guessBoard[i][j] + "  |" + numBoard[1][i] + "\n";
                 } else {
-                    boardPrint += " " + board[i][j];
+                    boardPrint += " " + guessBoard[i][j];
                 }
             }
         }

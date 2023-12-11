@@ -4,7 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ae809255-4794-43e5-bdb1-1ff09890aa16" name="Changes" comment="I fixed the printing of the game board and started working on the orientation of its hints.">
+    <list default="true" id="ae809255-4794-43e5-bdb1-1ff09890aa16" name="Changes" comment="I fixed the orientation of the board and now the game is playable.">
+      <change afterPath="$PROJECT_DIR$/src/Solver.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Board.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
@@ -78,7 +79,14 @@
       <option name="project" value="LOCAL" />
       <updated>1701722208450</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="I fixed the orientation of the board and now the game is playable.">
+      <created>1702073197598</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1702073197599</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -95,6 +103,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="I started creating the board class with pre-made already working boards as well as starting a hint getter which will give the user the clues needed to solve the puzzle." />
     <MESSAGE value="I fixed the printing of the game board and started working on the orientation of its hints." />
-    <option name="LAST_COMMIT_MESSAGE" value="I fixed the printing of the game board and started working on the orientation of its hints." />
+    <MESSAGE value="I fixed the orientation of the board and now the game is playable." />
+    <option name="LAST_COMMIT_MESSAGE" value="I fixed the orientation of the board and now the game is playable." />
   </component>
 </project>
